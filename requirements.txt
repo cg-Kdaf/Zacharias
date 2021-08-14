@@ -1,0 +1,4 @@
+fastpunct 
+sounddevice 
+vosk 
+json 
