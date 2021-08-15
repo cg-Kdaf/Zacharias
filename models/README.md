@@ -4,11 +4,11 @@ Put here the pre trained models used by the MachineLearning libraries used by Za
 
 The files should be organized as following :
 
-              / project1 / model1/
-              /          / model2/
-              /
-    Zacharias / project2 / model1/
-              /          / model2/
-              /
-              / project3 / model1/
-                         / model2/
+                       / project1 / model1/
+                       /          / model2/
+                       /
+    Zacharias / models / project2 / model1/
+                       /          / model2/
+                       /
+                       / project3 / model1/
+                                  / model2/
