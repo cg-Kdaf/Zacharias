@@ -2,3 +2,4 @@ fastpunct
 sounddevice 
 vosk 
 json 
+configparser 

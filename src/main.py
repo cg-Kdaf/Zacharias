@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-import os
 import queue
 import sounddevice as sd
 import vosk
 import sys
 import json
 import fastpunct
+from private_data import Settings, dl_model_path
 
 q = queue.Queue()
+settings = Settings()
 
 speech_to_text_model = "english_us_small"
 
@@ -32,33 +33,30 @@ def callback(indata, frames, time, status):
 
 
 try:
-    if os.path.exists(os.path.join("models/vosk", speech_to_text_model)):
-        print(f"Vosk Speech To Text found with model : '{speech_to_text_model}'.")
-    else:
-        print("Please download a model for your language from https://alphacephei.com/vosk/models")
-        print(f"and unpack as '{speech_to_text_model}' in the Zacharias/models/vosk/ folder.")
-        exit(0)
-
     vosk.SetLogLevel(-1)
-    model = vosk.Model(os.path.join("models/vosk", speech_to_text_model))
     device_info = sd.query_devices(None, 'input')
     samplerate = int(device_info['default_samplerate'])
 
-    punct = None
-    if os.path.exists("models/fastpunct/english"):
-        punct = fastpunct.FastPunct(checkpoint_local_path="models/fastpunct/english")
-        print("Punctuation restoration 'fastpunct' library found.")
+    model_path = dl_model_path(settings["vosk"])
+    if model_path:
+        vosk_model = vosk.Model(model_path)
     else:
-        print("Please download a model")
-        print("and unpack it in the Zacharias/models/fastpunct/english folder.")
+        print("Model missing, could not start")
+        exit(0)
 
+    model_path = dl_model_path(settings["fastpunct"])
+    punct = None
+    if model_path:
+        punct = fastpunct.FastPunct(checkpoint_local_path=model_path)
+
+    print("Listening")
     with sd.RawInputStream(samplerate=samplerate,
                            blocksize=8000,
                            device=None,
                            dtype='int16',
                            channels=1,
                            callback=callback):
-        rec = vosk.KaldiRecognizer(model, samplerate)
+        rec = vosk.KaldiRecognizer(vosk_model, samplerate)
         rec.SetWords(True)
         while True:
             data = q.get()
@@ -77,5 +75,6 @@ try:
 
 except KeyboardInterrupt:
     exit(0)
+
 except Exception as e:
     print(type(e).__name__ + ': ' + str(e))
