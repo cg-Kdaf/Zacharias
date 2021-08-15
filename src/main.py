@@ -64,13 +64,15 @@ try:
                 res = json.loads(rec.FinalResult())
                 if res['text']:
                     sentence = res['text']
-                    sentence = punct.punct(sentence)
+                    if punct:
+                        sentence = punct.punct(sentence)
                     print("\r\033[K" + sentence)
             else:
                 res = json.loads(rec.PartialResult())
                 if res['partial']:
                     sentence = res['partial']
-                    sentence = punct.punct(sentence)
+                    if punct:
+                        sentence = punct.punct(sentence)
                     print("\r\033[K" + bcolors.OKGREEN + sentence + bcolors.ENDC, end="")
 
 except KeyboardInterrupt:
