@@ -1,0 +1,44 @@
+01 - Play some music please.
+01 - Play my favorite songs.
+01 - Play my favorite musics.
+01 - Play some musics in one hour.
+
+02 - Open google chrome, please.
+02 - Let me do a search.
+02 - open a browser on my computer.
+
+03 - Could you lock my session ?
+03 - Lock my computer please.
+03 - Make my computer safe now.
+
+04 - Call my dad.
+04 - Can you call Nick for me please ?
+04 - Call the most recent person I talked to.
+
+05 - Send a SMS to Donald.
+05 - Write to Tony that I'm coming.
+05 - Send a message to Mary.
+
+06 - Set a reminder for thusday the seven.
+06 - Remind me tomorrow to wash my bike.
+06 - Add a reminder for the next weekend.
+
+07 - What is the weather today ?
+07 - Will it be cold this afternoon at home?
+07 - What will be the temperature tomorrow ?
+
+08 - Add an event in the calendar for tommorow
+08 - Put in the calendar my next visit to the doctor.
+08 - Add for tommorow an event in the calendar.
+
+09 - Light on.
+09 - Turn on the light please.
+09 - Enlight the room when I'll come back.
+
+10 - Open the curtains please.
+10 - I can't see anything, please open the curtains.
+10 - I want to see the outside, open the curtains.
+
+11 - Could you tell me if I have unread mails ?
+11 - What are my latest emails ?
+11 - Do I have some unread mails ?
