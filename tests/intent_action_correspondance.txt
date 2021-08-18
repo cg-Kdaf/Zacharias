@@ -9,7 +9,7 @@
 
 03 - Could you lock my session ?
 03 - Lock my computer please.
-03 - Make my computer safe now.
+03 - Close my session please.
 
 04 - Call my dad.
 04 - Can you call Nick for me please ?

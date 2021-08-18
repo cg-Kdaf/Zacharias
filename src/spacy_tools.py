@@ -21,7 +21,7 @@ def intent_to_action(speech: str, actions: list):
     action_probability = 0.
     speech_nlp = NLP_MODEL(speech)
     action_id = 0
-    probability_multiplier = 1. if any(doc.pos_ == "NOUN" for doc in speech_nlp) else 0.8
+    probability_multiplier = 1. if any(doc.pos_ == "NOUN" for doc in speech_nlp) else 1.
     for id, action in enumerate(actions):
         factor = float(NLP_MODEL(action).similarity(speech_nlp))
         if factor > action_probability:
@@ -92,18 +92,21 @@ def test_samples():
             chunk_len = 0
             continue
         clauses = split_sentence_clauses(sentence[1])
-        found_action_id = 0
+        found_action_id = -1
         factor = 0.
         for clause in clauses:
             id, fac, power = intent_to_action(clause, actions)
             if fac*power > factor:
-                # print(clause)
-                found_action_id, factor = id, fac*power
+                # print(clause, fac)
+                factor = fac*power
+                if fac > 0.7:
+                    found_action_id = id
         chunk_len += 1
         if found_action_id != sentence[0]-1:
             print(clauses, factor)
             print(f"'{sentence[1]}'   ->   Error")
-            print(f"""found : \n   {actions[found_action_id]}
+            found_action = actions[found_action_id] if found_action_id != -1 else "None"
+            print(f"""found : \n   {found_action}
                       \rinstead of\n   {actions[sentence[0]-1]} \n""")
             error_len += 1
             # displacy.serve(NLP_MODEL(sentence[1]), style="dep")  # Used to analyse the error
