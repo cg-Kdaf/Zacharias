@@ -1,8 +1,7 @@
 from spacy import load as spacy_load
 # from spacy import displacy
 from os import path
-
-project_root = path.split(path.dirname(path.abspath(__file__)))[0]
+import utils
 
 NLP_MODEL = spacy_load("en_core_web_md")
 
@@ -69,10 +68,10 @@ def split_sentence_clauses(sentences):
 
 
 def test_samples():
-    actions = open(path.join(project_root, "tests/basic_actions"), "r").readlines()
+    actions = open(path.join(utils.project_root, "tests/basic_actions"), "r").readlines()
     for id in range(len(actions)):
         actions[id] = actions[id].replace("\n", "").split(" - ")[1]
-    sentences_ = open(path.join(project_root, "tests/intent_action_correspondance.txt"), "r")
+    sentences_ = open(path.join(utils.project_root, "tests/intent_action_correspondance.txt"), "r")
     sentences_ = sentences_.readlines()
     sentences = []
     for id in range(len(sentences_)):

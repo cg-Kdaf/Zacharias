@@ -1,7 +1,6 @@
 from os import path, mkdir, listdir
 import configparser
-
-project_root = path.split(path.dirname(path.abspath(__file__)))[0]
+import utils
 
 
 def default_config(config):
@@ -16,7 +15,7 @@ def default_config(config):
 
 class Settings:
     __config = configparser.ConfigParser()
-    __config_path = path.join(project_root, "settings")
+    __config_path = path.join(utils.project_root, "settings")
 
     def __init__(self):
         # Check if the settings folder already exist
@@ -92,7 +91,7 @@ def dl_model_path(project):
         return None
     if not model_name:
         error("Model name empty")
-    path_models = path.join(project_root, "models")
+    path_models = path.join(utils.project_root, "models")
     if not path.exists(path_models):
         mkdir(path_models)
         error("Model folder unexisting. Creating one at : " + path_models)
